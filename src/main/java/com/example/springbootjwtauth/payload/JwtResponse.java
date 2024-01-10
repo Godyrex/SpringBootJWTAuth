@@ -19,10 +19,11 @@ public class JwtResponse {
     private String email;
     private String name;
     private String lastname;
+    private boolean verified;
     private List<String> roles;
 
 
-    public JwtResponse(String token, String id, String username, String email, String name, String lastname, List<String> roles) {
+    public JwtResponse(String token, String id, String username, String email, String name, String lastname,boolean verified, List<String> roles) {
         this.token = token;
         this.id = id;
         this.username = username;
@@ -30,6 +31,7 @@ public class JwtResponse {
         this.name = name;
         this.lastname = lastname;
         this.roles = roles;
+        this.verified = verified;
     }
 }
 

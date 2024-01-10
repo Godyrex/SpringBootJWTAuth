@@ -56,6 +56,7 @@ public class AuthController {
                 userDetails.getEmail(),
                 userDetails.getName(),
                 userDetails.getLastname(),
+                userDetails.isVerified(),
                 roles));
     }
 

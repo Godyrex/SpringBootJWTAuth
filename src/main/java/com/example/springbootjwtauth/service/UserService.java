@@ -23,7 +23,7 @@ public class UserService  implements IUserService {
     private final Patcher patcher;
     private final JavaMailSender mailSender;
     @Override
-    public UserRequest updateUser (UserRequest userRequest){
+    public User updateUser (UserRequest userRequest){
         User existingUser = userRepository.findById(userRequest.getId())
                 .orElseThrow(() -> new UserNotFoundException("User Not Found"));
         UserRequest incompleteUser = UserRequest.build(existingUser);
@@ -35,12 +35,11 @@ public class UserService  implements IUserService {
             existingUser.setLastname(incompleteUser.getLastname());
 
             userRepository.save(existingUser);
-            incompleteUser.setPassword("******");
-            return incompleteUser;
+            return existingUser;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return incompleteUser;
+        return existingUser;
     }
 
     @Override

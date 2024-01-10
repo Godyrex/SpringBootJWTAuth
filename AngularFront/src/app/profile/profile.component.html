@@ -1,0 +1,27 @@
+<div class="app-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <h2>Profile</h2>
+    <!-- profile-update-form.component.html -->
+    <form (ngSubmit)="update()">
+      <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
+      <label>Password:</label>
+      <input [(ngModel)]="profileRequest.password" id="password" name="password" type="password" >
+
+      <label >Email:</label>
+      <input [(ngModel)]="profileRequest.email" id="email" name="email"  type="email" >
+
+      <label >Name:</label>
+      <input [(ngModel)]="profileRequest.name" id="name" name="name"  type="text" >
+
+      <label>Lastname:</label>
+      <input [(ngModel)]="profileRequest.lastname" id="lastname" name="lastname"  type="text">
+
+      <button type="submit">Update Profile</button>
+    </form>
+
+
+
+    <!-- Add more dashboard components/content as needed -->
+  </div>
+</div>

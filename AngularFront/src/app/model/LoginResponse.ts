@@ -6,5 +6,6 @@ export interface LoginResponse {
   email?: string;
   name?: string;
   lastname?: string;
+  verified?: boolean;
   roles?: string[];
 }

@@ -1,5 +1,6 @@
 package com.example.springbootjwtauth.controller;
 
+import com.example.springbootjwtauth.entity.User;
 import com.example.springbootjwtauth.iservice.IUserService;
 import com.example.springbootjwtauth.payload.request.UserRequest;
 import com.example.springbootjwtauth.service.AuthService;
@@ -18,7 +19,7 @@ import java.util.Objects;
 public class UserController {
     private final IUserService userService;
     @PatchMapping("/update")
-    public ResponseEntity<UserRequest> updateUser(@Valid @RequestBody UserRequest userRequest) throws IllegalAccessException {
+    public ResponseEntity<User> updateUser(@Valid @RequestBody UserRequest userRequest) throws IllegalAccessException {
     if(Objects.equals(userRequest.getId(), AuthService.getCurrentUserDetails().getId())){
         return ResponseEntity.ok(userService.updateUser(userRequest));
     }else{

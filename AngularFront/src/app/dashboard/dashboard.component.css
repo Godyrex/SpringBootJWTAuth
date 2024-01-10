@@ -1,0 +1,36 @@
+.app-container {
+  display: flex;
+  height: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px; /* Add padding or adjust as needed */
+  margin-left: 250px; /* Set to the width of your sidebar */
+  transition: margin-left 0.3s;
+}
+h2 {
+  color: #333;
+}
+
+.dashboard-item {
+  background-color: #f4f4f4;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item h3 {
+  color: #555;
+}
+
+.dashboard-item ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dashboard-item li {
+  margin-bottom: 5px;
+  color: #777;
+}

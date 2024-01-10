@@ -1,1 +1,21 @@
-<p>dashboard works!</p>
+<!-- app.component.html -->
+<div class="app-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <h2>Dashboard</h2>
+<router-outlet> </router-outlet>
+    <!-- Example Dashboard Content -->
+    <div class="dashboard-item">
+      <h3>Welcome back {{user.username}}</h3>
+      <h5 style="cursor: pointer; color: blue;" routerLink="/profile">Complete you profile</h5>
+      <ul>
+        <li *ngIf="!user.verified">Email not verified</li>
+        <li *ngIf="!user.name">Add your name</li>
+        <li *ngIf="!user.lastname">Add your lastname</li>
+      </ul>
+    </div>
+
+
+    <!-- Add more dashboard components/content as needed -->
+  </div>
+</div>

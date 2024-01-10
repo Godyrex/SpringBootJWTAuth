@@ -88,7 +88,7 @@ public class UserService  implements IUserService {
             return false;
         } else {
             user.setVerificationCode(null);
-            user.setEnabled(true);
+            user.setVerified(true);
             userRepository.save(user);
 
             return true;

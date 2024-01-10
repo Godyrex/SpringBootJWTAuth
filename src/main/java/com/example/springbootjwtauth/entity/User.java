@@ -38,6 +38,7 @@ public class User implements UserDetails {
     @Size(max = 20)
     private String lastname;
     private String verificationCode;
+    private boolean verified;
     private boolean enabled;
     private List<Role> role = new ArrayList<>();
 

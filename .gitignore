@@ -46,3 +46,84 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+#Angular
+# Compiled output
+AngularFront/dist
+AngularFront/tmp
+AngularFront/out-tsc
+AngularFront/bazel-out
+
+# Node
+AngularFront/node_modules
+AngularFront/npm-debug.log
+AngularFront/yarn-error.log
+
+# IDEs and editors
+AngularFront/.idea/
+AngularFront/.project
+AngularFront/.classpath
+AngularFront/.c9/
+AngularFront/*.launch
+AngularFront/.settings/
+AngularFront/*.sublime-workspace
+
+# Visual Studio Code
+AngularFront/.vscode/*
+AngularFront/!.vscode/settings.json
+AngularFront/!.vscode/tasks.json
+AngularFront/!.vscode/launch.json
+AngularFront/!.vscode/extensions.json
+AngularFront/.history/*
+
+# Miscellaneous
+AngularFront/.angular/cache
+AngularFront/.sass-cache/
+AngularFront/connect.lock
+AngularFront/coverage
+AngularFront/libpeerconnection.log
+AngularFront/testem.log
+AngularFront/typings
+
+# System files
+AngularFront/.DS_Store
+AngularFront/Thumbs.db

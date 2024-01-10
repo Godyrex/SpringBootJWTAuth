@@ -79,8 +79,8 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
-        user.setEnabled(false);
-
+        user.setEnabled(true);
+        user.setVerified(false);
         user.getRole().add(USER);
         userService.sendVerificationEmail(user,"localhost:8080");
         userRepository.save(user);

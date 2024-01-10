@@ -1,0 +1,21 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+<div class="login-container">
+  <form (ngSubmit)="login()">
+    <h2>Login</h2>
+    <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
+    <label for="username">Username:</label>
+    <input [(ngModel)]="loginRequest.username" type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input [(ngModel)]="loginRequest.password" type="password" id="password" name="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+</body>
+

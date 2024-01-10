@@ -82,8 +82,7 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
-        //enable = true until i finish mail verification
-        user.setEnabled(true);
+        user.setEnabled(false);
 
         user.getRole().add(USER);
         userService.sendVerificationEmail(user,"localhost:8080");

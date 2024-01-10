@@ -21,7 +21,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorObject, HttpStatus.UNAUTHORIZED);
     }
     @ExceptionHandler(UserNotFoundException.class)
-
     public ResponseEntity<ErrorObject> handleUserNotFoundException(UserNotFoundException e, WebRequest webRequest) {
 
         ErrorObject errorObject = new ErrorObject();
@@ -29,6 +28,33 @@ public class GlobalExceptionHandler {
         errorObject.setMessage(e.getMessage());
         errorObject.setTimestamp(new Date());
         return new ResponseEntity<>(errorObject, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(RoleAlreadyAssignedException.class)
+    public ResponseEntity<ErrorObject> handleRoleAlreadyAssignedException(RoleAlreadyAssignedException e, WebRequest webRequest) {
+
+        ErrorObject errorObject = new ErrorObject();
+        errorObject.setStatusCode(HttpStatus.CONFLICT.value());
+        errorObject.setMessage(e.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<>(errorObject, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(UserRoleNotFoundException.class)
+    public ResponseEntity<ErrorObject> handleUserRoleNotFoundException(UserRoleNotFoundException e, WebRequest webRequest) {
+
+        ErrorObject errorObject = new ErrorObject();
+        errorObject.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorObject.setMessage(e.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<>(errorObject, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(UserBanException.class)
+    public ResponseEntity<ErrorObject> handleUserBanException(UserBanException e, WebRequest webRequest) {
+
+        ErrorObject errorObject = new ErrorObject();
+        errorObject.setStatusCode(HttpStatus.CONFLICT.value());
+        errorObject.setMessage(e.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<>(errorObject, HttpStatus.CONFLICT);
     }
 }
 

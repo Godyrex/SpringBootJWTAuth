@@ -1,14 +1,20 @@
 package com.example.springbootjwtauth.controller;
 
 import com.example.springbootjwtauth.entity.User;
+import com.example.springbootjwtauth.iservice.IUserService;
 import com.example.springbootjwtauth.payload.JwtResponse;
 import com.example.springbootjwtauth.payload.request.LoginRequest;
 import com.example.springbootjwtauth.payload.request.SignupRequest;
 import com.example.springbootjwtauth.repository.UserRepository;
 import com.example.springbootjwtauth.security.jwt.JWTUtils;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static com.example.springbootjwtauth.entity.Role.USER;
@@ -30,6 +37,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final JWTUtils jwtUtils;
+    private final IUserService userService;
     @PostMapping("/signing")
     public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -55,7 +63,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws MessagingException, UnsupportedEncodingException {
         if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
             return ResponseEntity
                     .badRequest()
@@ -72,8 +80,13 @@ public class AuthController {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
+        String randomCode = RandomString.make(64);
+        user.setVerificationCode(randomCode);
+        //enable = true until i finish mail verification
+        user.setEnabled(true);
 
         user.getRole().add(USER);
+        userService.sendVerificationEmail(user,"localhost:8080");
         userRepository.save(user);
 
         return ResponseEntity.ok("User registered successfully!");

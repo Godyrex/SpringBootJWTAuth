@@ -5,6 +5,7 @@ import com.example.springbootjwtauth.payload.request.UserRequest;
 import com.example.springbootjwtauth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,14 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable String id){
         userService.deleteUser(id);
         return  ResponseEntity.ok("User Deleted!");
+    }
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyUser(@Param("code") String code) {
+        if (userService.verify(code)) {
+            return ResponseEntity.ok("Account verified");
+        } else {
+            return ResponseEntity.badRequest().body("Account not verified");
+        }
     }
 
 }

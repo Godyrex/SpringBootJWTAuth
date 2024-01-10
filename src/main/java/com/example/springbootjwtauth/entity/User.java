@@ -37,7 +37,8 @@ public class User implements UserDetails {
     private String name;
     @Size(max = 20)
     private String lastname;
-
+    private String verificationCode;
+    private boolean enabled;
     private List<Role> role = new ArrayList<>();
 
     public User(String username, String email, String password) {
@@ -78,6 +79,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

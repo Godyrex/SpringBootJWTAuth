@@ -3,6 +3,7 @@ package com.example.springbootjwtauth.controller;
 import com.example.springbootjwtauth.entity.User;
 import com.example.springbootjwtauth.iservice.IUserService;
 import com.example.springbootjwtauth.payload.JwtResponse;
+import com.example.springbootjwtauth.payload.SignupResposne;
 import com.example.springbootjwtauth.payload.request.LoginRequest;
 import com.example.springbootjwtauth.payload.request.SignupRequest;
 import com.example.springbootjwtauth.repository.UserRepository;
@@ -61,17 +62,17 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<SignupResposne> registerUser(@Valid @RequestBody SignupRequest signUpRequest) throws MessagingException, UnsupportedEncodingException {
         if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: Username is already taken!");
+                    .body(new SignupResposne("Error: Username is already taken!"));
         }
 
         if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
                     .badRequest()
-                    .body("Error: Email is already in use!");
+                    .body(new SignupResposne("Error: Email is already in use!"));
         }
 
         // Create new user's account
@@ -86,6 +87,6 @@ public class AuthController {
         userService.sendVerificationEmail(user,"localhost:8080");
         userRepository.save(user);
 
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.ok(new SignupResposne("User Created"));
     }
 }

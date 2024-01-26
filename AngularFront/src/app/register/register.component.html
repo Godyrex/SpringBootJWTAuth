@@ -6,33 +6,37 @@
 </head>
 <body>
 <div class="registration-container">
-  <form  (ngSubmit)="registerUser()">
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
     <h2>Registration</h2>
-    <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
+    <div *ngIf="messagesuccess" id="message-sucess" class="message-container">{{messagesuccess}}</div>
+
+    <div class="text-danger" *ngIf="message" id="message-error">{{message}}</div>
     <label for="username">Username:</label>
     <input
+      formControlName="username"
       type="text"
       id="username"
-      name="username"
-      [(ngModel)]="registerRequest.username"
-      required>
+      name="username">
+    <div class="text-danger" *ngIf="registerForm.controls.username.touched && registerForm.controls.username?.invalid">
+      username must be at least 3 characters and maximum 20 characters</div>
 
     <label for="email">Email:</label>
     <input
+      formControlName="email"
       type="email"
       id="email"
-      name="email"
-      [(ngModel)]="registerRequest.email"
-      required>
+      name="email">
+    <div class="text-danger" *ngIf="registerForm.controls.email.touched && registerForm.controls.email?.invalid">
+      email must be a valid email address</div>
 
     <label for="password">Password:</label>
     <input
+      formControlName="password"
       type="password"
       id="password"
-      name="password"
-      [(ngModel)]="registerRequest.password"
-      required>
-
+      name="password">
+    <div class="text-danger" *ngIf="registerForm.controls.password.touched && registerForm.controls.password?.invalid">
+      password must be at least 8 characters and maximum 50 characters</div>
     <button type="submit">Register</button>
   </form>
 </div>

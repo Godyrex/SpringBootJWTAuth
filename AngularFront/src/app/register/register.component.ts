@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
 import {AuthenticationService} from "../service/authentication.service";
 import {RegisterRequest} from "../model/RegisterRequest";
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -13,23 +12,46 @@ import { FormBuilder } from '@angular/forms';
 export class RegisterComponent {
   registerRequest : RegisterRequest = {};
   message = '';
+  messagesuccess = '';
+  registerForm = this.formBuilder.group({
+    username: ['',
+      [
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(3)
+      ]
+    ],
+    email: ['',
+      [
+        Validators.required,
+        Validators.email
+      ]],
+    password: ['',
+      [
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.minLength(8)
+      ]],
+  });
   constructor(
     private authService : AuthenticationService,
-    private router : Router,
     private formBuilder : FormBuilder
   ) {
   }
   registerUser(){
-    this.message = '';
-    this.authService.register(this.registerRequest)
-      .subscribe(data => {
-          console.log(data)
-          this.message ='Account created successfully\\nPlease verify your email';
-        },
-        error => {
-          console.log(error)
-          this.message =error.error.message;
-        });
+    if(this.registerForm.valid) {
+      this.registerRequest = Object.assign(this.registerRequest,this.registerForm.value);
+      console.log(this.registerRequest);
+      this.authService.register(this.registerRequest)
+        .subscribe(data => {
+            console.log(data)
+            this.messagesuccess = data.msg!;
+          },
+          error => {
+            console.log("register error :",error)
+            this.message = error.message;
+          });
+    }
 
   }
 }

@@ -5,14 +5,17 @@
 </head>
 <body>
 <div class="login-container">
-  <form (ngSubmit)="login()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <h2>Login</h2>
-    <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
+    <div class="text-danger" *ngIf="message">{{message}}.</div>
     <label for="username">Username:</label>
-    <input [(ngModel)]="loginRequest.username" type="text" id="username" name="username" required>
-
+    <input formControlName="username" type="text" id="username" name="username">
+    <div class="text-danger" *ngIf="loginForm.controls.username.touched && loginForm.controls.username?.invalid">
+      Please enter a username.</div>
     <label for="password">Password:</label>
-    <input [(ngModel)]="loginRequest.password" type="password" id="password" name="password" required>
+    <input formControlName="password" type="password" id="password" name="password">
+    <div class="text-danger" *ngIf="loginForm.controls.password.touched && loginForm.controls.password?.invalid">
+      Please enter a password.</div>
 
     <button type="submit">Login</button>
   </form>

@@ -3,19 +3,27 @@
   <div class="main-content">
     <h2>Profile</h2>
     <!-- profile-update-form.component.html -->
-    <form (ngSubmit)="update()">
+    <form [formGroup]="profileForm" (ngSubmit)="update()">
       <div *ngIf="message" id="message-container" class="message-container">{{message}}</div>
       <label>Password:</label>
-      <input [(ngModel)]="profileRequest.password" id="password" name="password" type="password" >
+      <input formControlName="password" id="password" name="password" type="password" >
+      <div class="text-danger" *ngIf="profileForm.controls.password.dirty && profileForm.controls.password?.invalid">
+        password must be at least 8 characters and maximum 50 characters</div>
 
       <label >Email:</label>
-      <input [(ngModel)]="profileRequest.email" id="email" name="email"  type="email" >
+      <input formControlName="email"  id="email" name="email"  type="email" >
+      <div class="text-danger" *ngIf="profileForm.controls.email.dirty && profileForm.controls.email?.invalid">
+        email must be a valid email address</div>
 
       <label >Name:</label>
-      <input [(ngModel)]="profileRequest.name" id="name" name="name"  type="text" >
+      <input formControlName="name"  id="name" name="name"  type="text" >
+      <div class="text-danger" *ngIf="profileForm.controls.name.dirty && profileForm.controls.name?.invalid">
+        name must be under 20 characters</div>
 
       <label>Lastname:</label>
-      <input [(ngModel)]="profileRequest.lastname" id="lastname" name="lastname"  type="text">
+      <input formControlName="lastname" id="lastname" name="lastname"  type="text">
+      <div class="text-danger" *ngIf="profileForm.controls.lastname.dirty && profileForm.controls.lastname?.invalid">
+        lastname must be under 20 characters</div>
 
       <button type="submit">Update Profile</button>
     </form>
